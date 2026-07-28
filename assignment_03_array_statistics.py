@@ -36,8 +36,6 @@
 #
 
 # =============================================================================
-# YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
-# Function to calculate the sum
 def calculate_sum(numbers):
     total = 0
     for num in numbers:
@@ -86,5 +84,6 @@ else:
     print("Average:", calculate_average(numbers))
     print("Maximum:", find_max(numbers))
     print("Minimum:", find_min(numbers))
+
 
 

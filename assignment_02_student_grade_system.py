@@ -42,6 +42,33 @@
 
 #
 # =============================================================================
-# YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
+from typing import Optional
+
+def get_grade(score: int) -> Optional[str]:
+    """Return the letter grade for a score in 0-100, or None if out of range."""
+    if score < 0 or score > 100:
+        return None
+    if 80 <= score <= 100:
+        return "A"
+    elif 70 <= score <= 79:
+        return "B"
+    elif 60 <= score <= 69:
+        return "C"
+    elif 50 <= score <= 59:
+        return "D"
+    else:
+        return "F"
+
+if __name__ == "__main__":
+    try:
+        score = int(input("Enter student score (0-100): "))
+    except ValueError:
+        print("Please enter a valid integer.")
+    else:
+        grade = get_grade(score)
+        if grade is None:
+            print("Error: Score must be between 0 and 100.")
+        else:
+            print(f"Grade: {grade}")
 # =============================================================================
 

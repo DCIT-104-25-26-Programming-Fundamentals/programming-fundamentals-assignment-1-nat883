@@ -65,6 +65,149 @@
 
 #
 # =============================================================================
-# YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
+#!/usr/bin/env python3
+from typing import Optional, Tuple
+
+
+def add(a: float, b: float) -> float:
+    return a + b
+
+
+def subtract(a: float, b: float) -> float:
+    return a - b
+
+
+def multiply(a: float, b: float) -> float:
+    return a * b
+
+
+def divide(a: float, b: float) -> Optional[float]:
+    if b == 0:
+        return None
+    return a / b
+
+
+def modulus(a: float, b: float) -> Optional[float]:
+    if b == 0:
+        return None
+    return a % b
+
+
+def exponent(a: float, b: float) -> float:
+    return a ** b
+
+
+def read_number(prompt: str) -> Optional[float]:
+    """Read a number from input; return None if invalid."""
+    try:
+        return float(input(prompt).strip())
+    except ValueError:
+        print("Error: Please enter a valid number.")
+        return None
+
+
+def read_two_numbers() -> Optional[Tuple[float, float]]:
+    """Prompt for two numbers and return them as a tuple, or None on invalid input."""
+    a = read_number("Enter first number : ")
+    if a is None:
+        return None
+    b = read_number("Enter second number: ")
+    if b is None:
+        return None
+    return a, b
+
+
+def fmt_num(x: float, force_decimals: Optional[int] = None) -> str:
+    """Format numbers:
+       - If force_decimals is provided, use that many decimals.
+       - Otherwise, show as integer if whole number, else trim trailing zeros.
+    """
+    if force_decimals is not None:
+        return f"{x:.{force_decimals}f}"
+    if float(x).is_integer():
+        return str(int(x))
+    # Trim unnecessary trailing zeros but keep a few decimals if needed
+    s = f"{x:.6f}".rstrip("0").rstrip(".")
+    return s
+
+
+def show_menu() -> None:
+    print("\n============================")
+    print("     SIMPLE CALCULATOR")
+    print("============================")
+    print("1. Addition")
+    print("2. Subtraction")
+    print("3. Multiplication")
+    print("4. Division")
+    print("5. Modulus")
+    print("6. Exponentiation")
+    print("7. Quit")
+
+
+def main() -> None:
+    while True:
+        show_menu()
+        choice = input("Select an operation (1-7): ").strip()
+        if choice == "1":
+            nums = read_two_numbers()
+            if not nums:
+                continue
+            a, b = nums
+            res = add(a, b)
+            print(f"Result: {fmt_num(a)} + {fmt_num(b)} = {fmt_num(res)}")
+        elif choice == "2":
+            nums = read_two_numbers()
+            if not nums:
+                continue
+            a, b = nums
+            res = subtract(a, b)
+            print(f"Result: {fmt_num(a)} - {fmt_num(b)} = {fmt_num(res)}")
+        elif choice == "3":
+            nums = read_two_numbers()
+            if not nums:
+                continue
+            a, b = nums
+            res = multiply(a, b)
+            print(f"Result: {fmt_num(a)} * {fmt_num(b)} = {fmt_num(res)}")
+        elif choice == "4":
+            nums = read_two_numbers()
+            if not nums:
+                continue
+            a, b = nums
+            res = divide(a, b)
+            if res is None:
+                print("Error: Cannot divide by zero.")
+            else:
+                print(f"Result: {fmt_num(a)} / {fmt_num(b)} = {fmt_num(res, force_decimals=2)}")
+        elif choice == "5":
+            nums = read_two_numbers()
+            if not nums:
+                continue
+            a, b = nums
+            res = modulus(a, b)
+            if res is None:
+                print("Error: Cannot perform modulus by zero.")
+            else:
+                print(f"Result: {fmt_num(a)} % {fmt_num(b)} = {fmt_num(res)}")
+        elif choice == "6":
+            nums = read_two_numbers()
+            if not nums:
+                continue
+            a, b = nums
+            try:
+                res = exponent(a, b)
+            except OverflowError:
+                print("Error: Result is too large.")
+                continue
+            print(f"Result: {fmt_num(a)} ** {fmt_num(b)} = {fmt_num(res)}")
+        elif choice == "7":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please enter a number from 1 to 7.")
+
+
+if __name__ == "__main__":
+    main()
 # =============================================================================
 
